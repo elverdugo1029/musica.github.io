@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎀 Nuestra Playlist • Amorcito</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='85' font-size='90'>🎀</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--pink1:#ff80b5;--pink2:#e91e8c;--pink3:#ff4da6;--pink4:#fce4ec;--rose:#c2185b;--soft:#fff0f7;--purple:#9c27b0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:#ffe0ef;overflow-x:hidden;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ctext y='20' font-size='20'%3E🌸%3C/text%3E%3C/svg%3E") 12 12,auto;}
+#bgCanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+/* Stickers correctos: usar PNG ya limpios, sin fondo negro/blanco */
+.img-sticker{position:fixed;pointer-events:none;z-index:1;user-select:none;animation:decoFloat ease-in-out infinite;}
+.img-sticker img{display:block;width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(194,24,91,.16));}
+.sk-hk-tl{top:-12px;left:-12px;width:145px;opacity:.92;animation-duration:6s;}
+.sk-hk-br{right:-10px;bottom:-8px;width:125px;opacity:.88;animation-duration:7s;animation-delay:1s;}
+.sk-bow-tr{top:62px;right:-12px;width:100px;opacity:.9;animation-duration:5.2s;animation-delay:.4s;}
+.sk-bow-bl{bottom:110px;left:-10px;width:88px;opacity:.86;animation-duration:8s;animation-delay:1.5s;}
+.sk-bow-mid{top:38%;right:-20px;width:78px;opacity:.72;animation-duration:6.5s;animation-delay:1.3s;}
+.sk-hk-mid{top:55%;left:-28px;width:96px;opacity:.68;animation-duration:9s;animation-delay:2.5s;}
+@keyframes decoFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-16px) rotate(3deg);}}
+.sticker{position:fixed;pointer-events:none;z-index:1;animation:stickerRise linear infinite;user-select:none;}
+@keyframes stickerRise{0%{transform:translateY(110vh) rotate(0deg);opacity:0;}8%{opacity:.9;}92%{opacity:.9;}100%{transform:translateY(-120px) rotate(720deg);opacity:0;}}
+.star-dot{position:fixed;border-radius:50%;pointer-events:none;z-index:1;animation:starPulse ease-in-out infinite;}
+@keyframes starPulse{0%,100%{opacity:.12;transform:scale(1);}50%{opacity:.45;transform:scale(1.5);}}
+
+/* Hero */
+.hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 60px;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border:1.5px solid #f48fb1;border-radius:50px;padding:8px 20px;font-size:12px;font-weight:700;color:#c2185b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;animation:fadeSlideDown 1s ease both;}
+.hero-title{font-family:'Dancing Script',cursive;font-size:clamp(38px,9vw,80px);font-weight:700;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#ff4da6 0%,#c2185b 30%,#e91e8c 60%,#9c27b0 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:titleShimmer 4s linear infinite,fadeSlideDown 1s .2s ease both;filter:drop-shadow(0 4px 12px rgba(233,30,140,.25));}
+@keyframes titleShimmer{0%{background-position:0% center;}100%{background-position:200% center;}}
+.hero-subtitle{font-family:'Dancing Script',cursive;font-size:clamp(18px,4vw,28px);color:#ad1457;margin-bottom:12px;animation:fadeSlideDown 1s .35s ease both;opacity:0;animation-fill-mode:forwards;}
+.hero-msg{max-width:560px;font-size:clamp(14px,2.5vw,17px);color:#880e4f;line-height:1.85;font-weight:400;margin-bottom:36px;animation:fadeSlideDown 1s .5s ease both;opacity:0;animation-fill-mode:forwards;}
+.hero-msg em{color:#e91e8c;font-style:normal;font-weight:700;}
+.hero-hearts{font-size:28px;animation:fadeSlideDown 1s .7s ease both;opacity:0;animation-fill-mode:forwards;letter-spacing:8px;}
+@keyframes fadeSlideDown{from{opacity:0;transform:translateY(-24px);}to{opacity:1;transform:translateY(0);}}
+.scroll-hint{margin-top:40px;animation:fadeSlideDown 1s 1s ease both,scrollBounce 1.5s 2s ease-in-out infinite;opacity:0;animation-fill-mode:forwards;font-size:13px;color:#c2185b;font-weight:600;letter-spacing:.5px;}
+@keyframes scrollBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* Canciones */
+.songs-section{position:relative;z-index:2;padding:40px 20px 60px;max-width:860px;margin:0 auto;}
+.section-title{font-family:'Dancing Script',cursive;font-size:clamp(28px,6vw,46px);font-weight:700;text-align:center;background:linear-gradient(90deg,#ff4da6,#c2185b,#9c27b0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+.section-sub{text-align:center;color:#ad1457;font-size:13px;font-weight:600;margin-bottom:40px;letter-spacing:.3px;}
+.song-card{background:rgba(255,255,255,.84);backdrop-filter:blur(16px);border-radius:24px;border:1.5px solid rgba(244,143,177,.45);margin-bottom:32px;overflow:hidden;box-shadow:0 8px 32px rgba(233,30,140,.10);transition:transform .3s,box-shadow .3s;}
+.song-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(233,30,140,.18);}
+.song-header{display:flex;align-items:center;gap:14px;padding:20px 22px 16px;flex-wrap:wrap;}
+.song-num{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#ff4da6,#c2185b);color:#fff;font-family:'Dancing Script',cursive;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(194,24,91,.3);}
+.song-info{flex:1;min-width:0;}
+.song-title{font-family:'Dancing Script',cursive;font-size:clamp(18px,3.5vw,24px);font-weight:700;background:linear-gradient(90deg,#c2185b,#e91e8c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.song-memory{font-size:13px;color:#880e4f;font-style:italic;margin-top:3px;line-height:1.45;}
+.song-yt-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#ff4da6,#c2185b);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;box-shadow:0 3px 10px rgba(194,24,91,.3);flex-shrink:0;}
+.song-yt-btn:hover{transform:scale(1.06);box-shadow:0 5px 16px rgba(194,24,91,.4);}
+.play-toggle{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:rgba(252,228,236,.55);border:none;width:100%;cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#c2185b;letter-spacing:.3px;transition:background .2s;}
+.play-toggle:hover{background:rgba(244,143,177,.35);}
+
+/* Video corregido: sin max-height que recorte controles del iframe */
+.video-wrap{position:relative;width:100%;display:grid;grid-template-rows:0fr;background:#000;border-top:1.5px solid rgba(244,143,177,.3);overflow:hidden;transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1);z-index:20;}
+.video-wrap.open{grid-template-rows:1fr;}
+.video-inner{min-height:0;overflow:hidden;}
+.video-ratio{aspect-ratio:16/9;background:#000;position:relative;width:100%;}
+.video-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:none;z-index:50;pointer-events:auto;display:block;}
+
+/* Playlist */
+.playlist-section{position:relative;z-index:2;padding:40px 20px 80px;max-width:600px;margin:0 auto;text-align:center;}
+.playlist-box{background:rgba(255,255,255,.87);backdrop-filter:blur(16px);border-radius:28px;border:2px solid rgba(244,143,177,.5);padding:36px 30px;box-shadow:0 12px 48px rgba(233,30,140,.14);position:relative;overflow:hidden;}
+.playlist-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(255,128,181,.1) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(156,39,176,.07) 0%,transparent 60%);pointer-events:none;}
+.playlist-kitty{position:relative;width:78px;height:auto;margin-bottom:8px;animation:kittyBounce 3s ease-in-out infinite;filter:drop-shadow(0 6px 14px rgba(233,30,140,.18));}
+@keyframes kittyBounce{0%,100%{transform:rotate(-5deg) translateY(0);}50%{transform:rotate(5deg) translateY(-8px);}}
+.playlist-title{position:relative;font-family:'Dancing Script',cursive;font-size:clamp(22px,5vw,32px);font-weight:700;background:linear-gradient(90deg,#ff4da6,#c2185b,#9c27b0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.playlist-desc{position:relative;font-size:14px;color:#880e4f;line-height:1.75;margin-bottom:24px;}
+.playlist-btn{position:relative;display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#ff4da6,#c2185b);color:#fff;text-decoration:none;border-radius:50px;padding:14px 32px;font-size:15px;font-weight:800;letter-spacing:.3px;box-shadow:0 6px 24px rgba(194,24,91,.35);transition:all .3s;}
+.playlist-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 32px rgba(194,24,91,.45);}
+.playlist-count{position:relative;margin-top:16px;font-size:12px;color:#ad1457;font-weight:600;opacity:.7;letter-spacing:.5px;}
+.footer{position:relative;z-index:2;text-align:center;padding:20px;font-family:'Dancing Script',cursive;font-size:18px;color:#c2185b;opacity:.7;}
+@media(max-width:500px){.song-header{flex-wrap:wrap;}.song-yt-btn{width:100%;justify-content:center;margin-top:6px;}.music-bar{right:10px;top:10px;padding:7px 12px;}}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<!-- Stickers con las imágenes correctas y sin fondo -->
+<!-- Guarda estas dos imágenes en la misma carpeta del HTML:
+     hello_kitty_sin_fondo.png
+     mono_sin_fondo.png
+-->
+<div class="img-sticker sk-hk-tl"><img src="hello_kitty_sin_fondo.png" alt=""></div>
+<div class="img-sticker sk-hk-br"><img src="hello_kitty_sin_fondo.png" alt=""></div>
+<div class="img-sticker sk-bow-tr"><img src="mono_sin_fondo.png" alt=""></div>
+<div class="img-sticker sk-bow-bl"><img src="mono_sin_fondo.png" alt=""></div>
+<div class="img-sticker sk-bow-mid"><img src="mono_sin_fondo.png" alt=""></div>
+<div class="img-sticker sk-hk-mid"><img src="hello_kitty_sin_fondo.png" alt=""></div>
+
+<!-- HERO: se quitó la figura central -->
+<section class="hero">
+  <div class="hero-badge">🎀 Una playlist con todo mi amor 🎀</div>
+  <h1 class="hero-title">Cada canción<br>eres tú</h1>
+  <p class="hero-subtitle">Para mi Amorcito 💌</p>
+  <p class="hero-msg">
+    La distancia no mide lo que siento.<br>
+    Cada vez que escucho estas canciones,<br>
+    <em>te siento cerca</em>, como si estuvieras aquí.<br>
+    Esta playlist es todo lo que no siempre<br>
+    sé cómo decirte con palabras. 🌸
+  </p>
+  <div class="hero-hearts">💕 🎀 💗 🌸 💖</div>
+  <div class="scroll-hint">↓ Escucha nuestra historia ↓</div>
+</section>
+
+<!-- CANCIONES -->
+<section class="songs-section">
+  <h2 class="section-title">🎵 Nuestras Canciones 🎵</h2>
+  <p class="section-sub">▶ Reproducir mini-video • 🔗 Abrir en YouTube Music</p>
+
+  <div class="song-card">
+    <div class="song-header">
+      <div class="song-num">1</div>
+      <div class="song-info"><div class="song-title">Un Beso</div><div class="song-memory">💋 Como empezó todo entre nosotros...</div></div>
+      <a class="song-yt-btn" href="https://music.youtube.com/watch?v=uBwk106e3es" target="_blank" rel="noopener">🔗 YT Music</a>
+    </div>
+    <button class="play-toggle" onclick="toggleVideo(this,'uBwk106e3es')">▶ Reproducir</button>
+    <div class="video-wrap" id="vid-uBwk106e3es"></div>
+  </div>
+
+  <div class="song-card">
+    <div class="song-header">
+      <div class="song-num">2</div>
+      <div class="song-info"><div class="song-title">Won't Stop</div><div class="song-memory">💜 Mi forma de decirte que esto no para...</div></div>
+      <a class="song-yt-btn" href="https://music.youtube.com/watch?v=H68HED1Ti3c" target="_blank" rel="noopener">🔗 YT Music</a>
+    </div>
+    <button class="play-toggle" onclick="toggleVideo(this,'H68HED1Ti3c')">▶ Reproducir</button>
+    <div class="video-wrap" id="vid-H68HED1Ti3c"></div>
+  </div>
+
+  <div class="song-card">
+    <div class="song-header">
+      <div class="song-num">3</div>
+      <div class="song-info"><div class="song-title">Accidentally in Love</div><div class="song-memory">🌸 Sin planearlo, sin buscarlo, así pasó...</div></div>
+      <a class="song-yt-btn" href="https://music.youtube.com/watch?v=vnBec1gpXSM" target="_blank" rel="noopener">🔗 YT Music</a>
+    </div>
+    <button class="play-toggle" onclick="toggleVideo(this,'vnBec1gpXSM')">▶ Reproducir</button>
+    <div class="video-wrap" id="vid-vnBec1gpXSM"></div>
+  </div>
+
+  <div class="song-card">
+    <div class="song-header">
+      <div class="song-num">4</div>
+      <div class="song-info"><div class="song-title">Tú y Tú</div><div class="song-memory">💗 Nuestra canción favorita. Siempre lo será.</div></div>
+      <a class="song-yt-btn" href="https://music.youtube.com/watch?v=1_qRsCQdzuE" target="_blank" rel="noopener">🔗 YT Music</a>
+    </div>
+    <button class="play-toggle" onclick="toggleVideo(this,'1_qRsCQdzuE')">▶ Reproducir</button>
+    <div class="video-wrap" id="vid-1_qRsCQdzuE"></div>
+  </div>
+
+  <div class="song-card">
+    <div class="song-header">
+      <div class="song-num">5</div>
+      <div class="song-info"><div class="song-title">Ma Meilleure Ennemie</div><div class="song-memory">✨ Hasta en los momentos difíciles, nos complementamos.</div></div>
+      <a class="song-yt-btn" href="https://music.youtube.com/watch?v=XbLemOwzdxk" target="_blank" rel="noopener">🔗 YT Music</a>
+    </div>
+    <button class="play-toggle" onclick="toggleVideo(this,'XbLemOwzdxk')">▶ Reproducir</button>
+    <div class="video-wrap" id="vid-XbLemOwzdxk"></div>
+  </div>
+
+  <div class="song-card">
+    <div class="song-header">
+      <div class="song-num">6</div>
+      <div class="song-info"><div class="song-title">Enamorado Tuyo</div><div class="song-memory">🎀 Nuestra canción favorita ahora mismo. Y lo dice todo.</div></div>
+      <a class="song-yt-btn" href="https://music.youtube.com/watch?v=R5cbxTPZNL0" target="_blank" rel="noopener">🔗 YT Music</a>
+    </div>
+    <button class="play-toggle" onclick="toggleVideo(this,'R5cbxTPZNL0')">▶ Reproducir</button>
+    <div class="video-wrap" id="vid-R5cbxTPZNL0"></div>
+  </div>
+</section>
+
+<!-- PLAYLIST COMPLETA -->
+<section class="playlist-section">
+  <div class="playlist-box">
+    <img class="playlist-kitty" src="hello_kitty_sin_fondo.png" alt="">
+    <div class="playlist-title">🎀 La Playlist Completa</div>
+    <p class="playlist-desc">Todas nuestras canciones juntas, en un solo lugar.<br>Ponla, cierra los ojos, y piensa en nosotros. 💕</p>
+    <a class="playlist-btn" href="https://music.youtube.com/playlist?list=PL2EeMPLmkDg6SctR55vCtLl8aCVprv6Xj&si=2uRLTFsyhoedp2Rh" target="_blank" rel="noopener">▶ &nbsp;Abrir Playlist en YouTube Music</a>
+    <div class="playlist-count">🌸 6 canciones • Hecha con todo mi amor 🌸</div>
+  </div>
+</section>
+
+<div class="footer">hecha con 💗 solo para ti, amorcito</div>
+
+<script>
+// CANVAS FONDO
+const canvas=document.getElementById('bgCanvas');
+const ctx=canvas.getContext('2d');
+let W,H;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const COLS=['#ff80b5','#e91e8c','#f48fb1','#c2185b','#ff4da6','#fce4ec','#ce93d8'];
+function drawHeart(c,x,y,s){c.beginPath();c.moveTo(x,y+s*.3);c.bezierCurveTo(x,y,x-s,y,x-s,y+s*.3);c.bezierCurveTo(x-s,y+s*.7,x,y+s*1.1,x,y+s*1.3);c.bezierCurveTo(x,y+s*1.1,x+s,y+s*.7,x+s,y+s*.3);c.bezierCurveTo(x+s,y,x,y,x,y+s*.3);c.fill();}
+class P{constructor(){this.reset();}reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=2+Math.random()*7;this.col=COLS[Math.floor(Math.random()*COLS.length)];this.vx=(Math.random()-.5)*.5;this.vy=-.2-Math.random()*.5;this.a=.06+Math.random()*.18;this.life=1;this.dec=.0015+Math.random()*.003;this.heart=Math.random()>.45;}draw(){ctx.save();ctx.globalAlpha=this.a*this.life;ctx.fillStyle=this.col;this.heart?drawHeart(ctx,this.x,this.y,this.r):(ctx.beginPath(),ctx.arc(this.x,this.y,this.r,0,Math.PI*2),ctx.fill());ctx.restore();}update(){this.x+=this.vx;this.y+=this.vy;this.life-=this.dec;if(this.life<=0||this.y<-20)this.reset();}}
+class Wave{constructor(){this.reset();}reset(){this.x=-200;this.y=Math.random()*H;this.spd=.3+Math.random()*.5;this.amp=15+Math.random()*35;this.col=COLS[Math.floor(Math.random()*COLS.length)];this.a=.03+Math.random()*.07;this.t=Math.random()*100;}draw(){ctx.save();ctx.globalAlpha=this.a;ctx.strokeStyle=this.col;ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<130;i++){const px=this.x+i*4,py=this.y+Math.sin((this.t+i)*.3)*this.amp;i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);}ctx.stroke();ctx.restore();}update(){this.x+=this.spd;this.t+=.018;if(this.x>W+200)this.reset();}}
+const parts=Array.from({length:70},()=>new P());
+const waves=Array.from({length:10},()=>new Wave());
+function drawDots(){ctx.save();ctx.globalAlpha=.05;ctx.fillStyle='#e91e8c';for(let x=0;x<W;x+=38)for(let y=0;y<H;y+=38){ctx.beginPath();ctx.arc(x,y,1.8,0,Math.PI*2);ctx.fill();}ctx.restore();}
+function anim(){ctx.clearRect(0,0,W,H);const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#ffe0ef');g.addColorStop(.5,'#ffd6e8');g.addColorStop(1,'#ffb3d1');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);drawDots();waves.forEach(w=>{w.update();w.draw();});parts.forEach(p=>{p.update();p.draw();});requestAnimationFrame(anim);}
+anim();
+
+// STICKERS FLOTANTES
+(function(){const em=['🌸','💕','🎀','✨','💖','🌷','🦋','💗','🍬','💝','🎵','⭐'];function spawn(){const el=document.createElement('div');el.className='sticker';el.textContent=em[Math.floor(Math.random()*em.length)];el.style.cssText='left:'+Math.random()*98+'%;font-size:'+(14+Math.random()*18)+'px;animation-duration:'+(8+Math.random()*9)+'s;animation-delay:'+Math.random()+'s;';document.body.appendChild(el);setTimeout(()=>el.remove(),(17+Math.random()*9)*1000);}for(let i=0;i<5;i++)setTimeout(spawn,i*900);setInterval(spawn,2000);})();
+
+// ESTRELLAS
+(function(){for(let i=0;i<16;i++){const s=document.createElement('div');s.className='star-dot';const sz=3+Math.random()*7;s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;background:'+COLS[Math.floor(Math.random()*COLS.length)]+';animation-duration:'+(2+Math.random()*4)+'s;animation-delay:'+Math.random()*4+'s;';document.body.appendChild(s);}})();
+
+// VIDEOS
+let currentVideo=null,currentBtn=null,currentVideoId=null;
+function closeCurrentVideo(){
+  if(currentVideo){
+    currentVideo.classList.remove('open');
+    currentVideo.innerHTML='';
+  }
+  if(currentBtn)currentBtn.textContent='▶ Reproducir';
+  currentVideo=null;currentBtn=null;currentVideoId=null;
+}
+function toggleVideo(btn,id){
+  const wrap=document.getElementById('vid-'+id);
+  if(wrap.classList.contains('open')){
+    closeCurrentVideo();
+    return;
+  }
+  if(currentVideo&&currentVideo!==wrap){
+    currentVideo.classList.remove('open');
+    currentVideo.innerHTML='';
+    if(currentBtn)currentBtn.textContent='▶ Reproducir';
+  }
+
+  wrap.classList.add('open');
+  wrap.innerHTML=`
+    <div class="video-inner">
+      <div class="video-ratio">
+        <iframe
+          src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0&controls=1&modestbranding=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>`;
+  btn.textContent='⏹ Cerrar video';
+  currentVideo=wrap;currentBtn=btn;currentVideoId=id;
+}
+</script>
+</body>
+</html>
